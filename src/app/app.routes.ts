@@ -22,4 +22,9 @@ export const routes: Routes = [
 		loadComponent: () =>
 			import('./pages/contact/contact.component').then((m) => m.ContactComponent),
 	},
+	{
+		path: '**',
+		loadComponent: () =>
+			import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),
+	},
 ];
