@@ -1,0 +1,46 @@
+<div>
+	<section
+		class="relative bg-gradient-to-r from-purple-600 to-blue-600 h-screen text-white overflow-hidden"
+	>
+		<div class="absolute inset-0">
+			<img
+				src="images/fondo.png"
+				alt="Background Image"
+				class="object-cover object-center w-full h-full"
+			/>
+			<div class="absolute inset-0 bg-black opacity-50"></div>
+		</div>
+
+		<div
+			class="relative z-10 flex flex-col justify-center items-center h-full text-center"
+		>
+			<h1
+				class="text-5xl font-bold leading-tight mb-4"
+			>
+				SOLUCIONES TOPOGRÁFICAS
+				<br />
+				HERNANDEZ
+			</h1>
+			<p class="text-lg text-gray-300 mb-8">
+				Calidad y precisión en cada proyecto.
+			</p>
+			<a
+				routerLink="/contact"
+				class="bg-blue-900 text-white hover:bg-blue-950 py-2 px-6 rounded-full text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+				>Contáctame</a
+			>
+		</div>
+	</section>
+</div>
+
+<div>
+	<app-about-section />
+</div>
+
+<div>
+	<app-services-section />
+</div>
+
+<div>
+	<app-contact-section />
+</div>
