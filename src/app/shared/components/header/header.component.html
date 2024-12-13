@@ -1,25 +1,83 @@
-<nav
-	class="bg-white/70 backdrop-blur border-gray-200 dark:bg-gray-900 fixed w-full z-50"
->
+<nav class="bg-white/70 backdrop-blur border-gray-200 fixed w-full z-50">
 	<div
 		class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
 	>
 		<a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
 			<img
-				src="images/logo.png"
-				class="h-12 rounded-full"
+				src="images/original.png"
+				class="h-12 rounded-full max-sm:h-10"
 				alt="STH Logo"
 			/>
 			<span
-				class="self-center text-2xl font-semibold whitespace-nowrap text-gray-900"
+				class="self-center text-2xl max-sm:text-base font-semibold whitespace-nowrap text-gray-900"
 				>HERNANDEZ</span
 			>
 		</a>
+
+		<!-- BUTTON ACCOUNT MOBILE -->
+		<button
+			id="userDropdownButton1"
+			data-dropdown-toggle="userDropdown1"
+			type="button"
+			[ngClass]="{ 'hidden': !isAuthenticate() }"
+			class="inline-flex md:hidden items-center rounded-lg justify-center p-2 hover:bg-gray-100 text-sm font-medium leading-none text-gray-900"
+		>
+			<svg
+				class="w-5 h-5 me-1"
+				aria-hidden="true"
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				fill="none"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke="currentColor"
+					stroke-width="2"
+					d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+				/>
+			</svg>
+			Cuenta
+			<svg
+				class="w-4 h-4 text-gray-900 ms-1"
+				aria-hidden="true"
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				fill="none"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="m19 9-7 7-7-7"
+				/>
+			</svg>
+		</button>
+
+		<!-- ACCOUNT OPTION MOBILE -->
+		<div
+			id="userDropdown1"
+			class="hidden z-10 w-56 divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-lg bg-white antialiased shadow"
+		>
+			<div class="p-2 text-sm font-medium text-gray-900">
+				<a
+					(click)="logout()"
+					class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100"
+				>
+					Sign Out
+				</a>
+			</div>
+		</div>
+
+		<!-- BUTTON MENU -->
 		<button
 			id="navbar-button"
 			data-collapse-toggle="navbar-default"
 			type="button"
-			class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+			class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
 			aria-controls="navbar-default"
 			aria-expanded="false"
 		>
@@ -40,51 +98,172 @@
 				/>
 			</svg>
 		</button>
+
+		<!-- MENU LIST -->
 		<div class="hidden w-full md:block md:w-auto" id="navbar-default">
 			<ul
-				class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+				class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent"
 			>
 				<li>
 					<a
 						(click)="hideMenu()"
+						#home
 						routerLink="/home"
-						class="block py-2 px-3 rounded md:hover:text-blue-700  md:bg-transparent md:p-0 dark:text-white md:dark:text-blue-500"
-						[ngClass]="getUrl() === 'home' ? 'text-white bg-blue-900 md:text-blue-700' : 'bg-transparent md:text-gray-900'"
-						[attr.aria-current]="getUrl() === 'home' ? 'page' : null"
+						routerLinkActive="is-active"
+						class="block py-2 px-3 rounded md:hover:text-blue-700 md:bg-transparent md:p-0"
+						[ngClass]="{
+							'text-white bg-blue-900 md:text-blue-700': isActive(
+								'is-active',
+								home
+							),
+							'bg-transparent md:text-gray-900': !isActive(
+								'is-active',
+								home
+							)
+						}"
 						>Inicio</a
 					>
 				</li>
 				<li>
 					<a
 						(click)="hideMenu()"
+						#about
 						routerLink="/about"
-						class="block py-2 px-3 rounded md:bg-transparent md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-						[ngClass]="getUrl() === 'about' ? 'text-white bg-blue-900 md:text-blue-700' : 'bg-transparent md:text-gray-900'"
-						[attr.aria-current]="getUrl() === 'about' ? 'page' : null"
+						routerLinkActive="is-active"
+						class="block py-2 px-3 rounded md:bg-transparent md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+						[ngClass]="{
+							'text-white bg-blue-900 md:text-blue-700': isActive(
+								'is-active',
+								about
+							),
+							'bg-transparent md:text-gray-900': !isActive(
+								'is-active',
+								about
+							)
+						}"
 						>Sobre mi</a
 					>
 				</li>
 				<li>
 					<a
 						(click)="hideMenu()"
+						#services
 						routerLink="/services"
-						class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-						[ngClass]="getUrl() === 'services' ? 'text-white bg-blue-900 md:text-blue-700' : 'bg-transparent md:text-gray-900'"
-						[attr.aria-current]="getUrl() === 'services' ? 'page' : null"
+						routerLinkActive="is-active"
+						class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+						[ngClass]="{
+							'text-white bg-blue-900 md:text-blue-700': isActive(
+								'is-active',
+								services
+							),
+							'bg-transparent md:text-gray-900': !isActive(
+								'is-active',
+								services
+							)
+						}"
 						>Servicios</a
 					>
 				</li>
 				<li>
 					<a
 						(click)="hideMenu()"
+						#projects
+						routerLink="/projects"
+						routerLinkActive="is-active"
+						class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+						[ngClass]="{
+							'text-white bg-blue-900 md:text-blue-700': isActive(
+								'is-active',
+								projects
+							),
+							'bg-transparent md:text-gray-900': !isActive(
+								'is-active',
+								projects
+							)
+						}"
+						>Proyectos</a
+					>
+				</li>
+				<li>
+					<a
+						(click)="hideMenu()"
+						#contact
 						routerLink="/contact"
-						class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-						[ngClass]="getUrl() === 'contact' ? 'text-white bg-blue-900 md:text-blue-700' : 'bg-transparent md:text-gray-900'"
-						[attr.aria-current]="getUrl() === 'contact' ? 'page' : null"
+						routerLinkActive="is-active"
+						class="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+						[ngClass]="{
+							'text-white bg-blue-900 md:text-blue-700': isActive(
+								'is-active',
+								contact
+							),
+							'bg-transparent md:text-gray-900': !isActive(
+								'is-active',
+								contact
+							)
+						}"
 						>Contacto</a
 					>
 				</li>
 			</ul>
+		</div>
+
+		<!-- BUTTON ACCOUNT PC -->
+		<button
+			id="userDropdownButton2"
+			data-dropdown-toggle="userDropdown2"
+			type="button"
+			[ngClass]="{ 'hidden': !isAuthenticate() }"
+			class="inline-flex max-md:hidden items-center rounded-lg justify-center p-2 hover:bg-gray-100 text-sm font-medium leading-none text-gray-900"
+		>
+			<svg
+				class="w-5 h-5 me-1"
+				aria-hidden="true"
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				fill="none"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke="currentColor"
+					stroke-width="2"
+					d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+				/>
+			</svg>
+			Cuenta
+			<svg
+				class="w-4 h-4 text-gray-900 ms-1"
+				aria-hidden="true"
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				fill="none"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="m19 9-7 7-7-7"
+				/>
+			</svg>
+		</button>
+
+
+		<!-- ACCOUNT OPTION PC -->
+		<div
+			id="userDropdown2"
+			class="hidden z-10 w-56 divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-lg bg-white antialiased shadow"
+		>
+			<div class="p-2 text-sm font-medium text-gray-900">
+				<a
+					(click)="logout()"
+					class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100"
+				>
+					Sign Out
+				</a>
+			</div>
 		</div>
 	</div>
 </nav>

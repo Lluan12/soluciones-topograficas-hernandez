@@ -1,0 +1,40 @@
+<section
+	class="container flex flex-col gap-8 lg:flex-row mx-auto px-8 mt-14 lg:mt-0 lg:px-20 py-12 lg:py-28"
+>
+	<div class="flex flex-col w-full lg:w-1/2 justify-center">
+		<h2
+			class="block antialiased text-4xl tracking-tight font-bold text-gray-900 text-blue-gray-900"
+		>
+			{{ project().title }}
+		</h2>
+		<p
+			class="block antialiased font-sans text-lg leading-relaxed text-inherit mt-8 max-w-lg !font-normal !text-gray-500"
+		>
+			{{ project().description }}
+		</p>
+	</div>
+
+	<!-- Slider main container -->
+	<div class="flex items-center w-full lg:w-1/2">
+		<div class="swiper shadow-slate-900 shadow-md h-72 md:h-96">
+			<!-- Additional required wrapper -->
+			<swiper-container
+				navigation="true"
+				effect="flip"
+				space-between="30"
+				centered-slides="true"
+				autoplay-delay="3000"
+				init="false"
+			>
+				@for(image of project().images; track $index) {
+				<swiper-slide
+					><img
+						[src]="image"
+						alt="Vista"
+						class="w-full h-72 md:h-96 object-cover object-center"
+				/></swiper-slide>
+				}
+			</swiper-container>
+		</div>
+	</div>
+</section>
