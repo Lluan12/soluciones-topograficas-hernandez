@@ -16,6 +16,7 @@
 					Algunos de nuestro proyectos realizados.
 				</p>
 			</div>
+
 			<div>
 				<button
 					(click)="openModal()"
@@ -27,7 +28,12 @@
 				</button>
 			</div>
 		</div>
-		
+
+		@if(projects().length === 0) {
+		<div class="flex justify-center items-center w-full h-80">
+			<mat-spinner></mat-spinner>
+		</div>
+		}@else {
 		<div class="mx-auto py-8">
 			<div
 				class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4"
@@ -36,7 +42,11 @@
 				@for(project of projects(); track project.id) {
 				<div class="bg-white rounded-lg border p-4">
 					<img
-						[src]="project.images.length === 0 ? 'images/image.png': project.images[0]"
+						[src]="
+							project.images.length === 0
+								? 'images/image.png'
+								: project.images[0]
+						"
 						alt="Placeholder Image"
 						class="w-full h-48 rounded-md object-cover"
 					/>
@@ -72,5 +82,6 @@
 				<!-- Add more items as needed -->
 			</div>
 		</div>
+		}
 	</div>
 </section>

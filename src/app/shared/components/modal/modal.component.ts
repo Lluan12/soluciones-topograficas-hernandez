@@ -1,20 +1,17 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
 	ReactiveFormsModule,
 	Validators,
 	FormGroup,
 	FormBuilder,
 } from '@angular/forms';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import Swal from 'sweetalert2';
 import { ImagesService } from '../../services/images.service';
 import { ProjectsService } from '../../services/projects.service';
-import Toastify from 'toastify-js';
-import 'toastify-js/src/toastify.css';
 
 @Component({
 	selector: 'app-modal',
@@ -22,9 +19,7 @@ import 'toastify-js/src/toastify.css';
 		MatDialogModule,
 		MatFormFieldModule,
 		ReactiveFormsModule,
-		MatIconModule,
-		MatButtonModule,
-		MatProgressSpinnerModule
+		MatProgressSpinnerModule,
 	],
 	templateUrl: './modal.component.html',
 	styleUrl: './modal.component.css',
@@ -34,6 +29,7 @@ export class ModalComponent implements OnInit {
 	private formBuilder = inject(FormBuilder);
 	private projectService = inject(ProjectsService);
 	private supabaseService = inject(ImagesService);
+	private snackBar = inject(MatSnackBar);
 	projectForm!: FormGroup;
 	imagenesPrevisualizadas: string[] = []; // Almacena las URLs de las imágenes para previsualización
 	imagenesArchivos: File[] = []; // Almacena los archivos seleccionados
@@ -130,7 +126,7 @@ export class ModalComponent implements OnInit {
 			data.images = urls;
 			await this.projectService.updateProject(id, data);
 
-			this.showToastify('Se ha agregado el proyecto correctamente');
+			this.showSnackBar('Se ha agregado el proyecto correctamente');
 		} catch (error) {
 			console.error('Error subiendo imágenes:', error);
 		} finally {
@@ -139,18 +135,10 @@ export class ModalComponent implements OnInit {
 		}
 	}
 
-	showToastify(message: string) {
-		Toastify({
-			text: message,
+	showSnackBar(message: string) {
+		this.snackBar.open(message, '', {
+			panelClass: 'success-snackbar',
 			duration: 3000,
-			newWindow: true,
-			gravity: 'top', // `top` or `bottom`
-			position: 'right', // `left`, `center` or `right`
-			stopOnFocus: true, // Prevents dismissing of toast on hover
-			style: {
-				background: 'linear-gradient(to right, #00b09b, #96c93d)',
-			},
-			onClick: function () {}, // Callback after click
-		}).showToast();
+		});
 	}
 }

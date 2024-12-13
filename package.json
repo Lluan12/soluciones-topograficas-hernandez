@@ -28,7 +28,6 @@
 		"sweetalert2": "^11.14.5",
 		"swiper": "^11.1.15",
 		"tailwindcss-animated": "^1.1.2",
-		"toastify-js": "^1.12.0",
 		"tslib": "^2.3.0",
 		"zone.js": "~0.15.0"
 	},
@@ -37,7 +36,6 @@
 		"@angular/cli": "^19.0.0",
 		"@angular/compiler-cli": "^19.0.0",
 		"@types/jasmine": "~5.1.0",
-		"@types/toastify-js": "^1.12.3",
 		"jasmine-core": "~5.4.0",
 		"karma": "~6.4.0",
 		"karma-chrome-launcher": "~3.2.0",

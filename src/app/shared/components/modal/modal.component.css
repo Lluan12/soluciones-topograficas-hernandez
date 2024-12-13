@@ -7,3 +7,7 @@
 	background: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
 	z-index: 10; /* Asegúrate de que esté sobre todo el contenido */
 }
+
+mat-spinner::ng-deep circle {
+	stroke: #1976D2;
+}

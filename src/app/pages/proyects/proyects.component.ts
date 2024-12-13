@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 import { Project } from '../../shared/model/project.model';
 import { ProjectsService } from '../../shared/services/projects.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,7 +11,7 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 @Component({
 	selector: 'app-proyects',
-	imports: [NgClass],
+	imports: [NgClass, MatProgressSpinnerModule],
 	templateUrl: './proyects.component.html',
 	styleUrl: './proyects.component.css',
 })

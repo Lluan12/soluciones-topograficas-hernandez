@@ -9,12 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectsService } from '../../shared/services/projects.service';
 import { Project } from '../../shared/model/project.model';
 import { Timestamp } from '@angular/fire/firestore';
-// core version + navigation, pagination modules:
-import { register } from 'swiper/element/bundle';
-register();
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 @Component({
 	selector: 'app-project-section',
@@ -81,13 +75,10 @@ export class ProjectSectionComponent implements OnInit {
 					);
 				},
 			},
-			navigator: {
-				
-			}
+			navigator: {},
 		};
 
 		Object.assign(swiperEl!, params);
-
 		swiperEl!.initialize();
 	}
 
