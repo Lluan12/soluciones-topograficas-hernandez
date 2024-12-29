@@ -1,14 +1,14 @@
 <section class="container mx-auto mt-14 px-8 lg:mt-0 lg:px-20 py-12 lg:py-28">
-    <div>
-        <h2
-            class="block antialiased text-4xl tracking-tight font-bold text-gray-900 text-blue-gray-900"
-        >
-            Servicios
-        </h2>
-    </div>
+	<div>
+		<h2
+			class="block antialiased text-4xl tracking-tight font-bold text-gray-900 text-blue-gray-900"
+		>
+			Servicios
+		</h2>
+	</div>
 	<div class="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-3">
-        @for(solution of solutions(); track solution.id) {
-            <app-card-solution [data]="solution" />
-        }
+		@for(solution of solutions(); track solution.id) {
+		<app-card-solution [data]="solution" />
+		}
 	</div>
 </section>

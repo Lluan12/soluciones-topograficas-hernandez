@@ -1,17 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AboutSectionComponent } from "../../shared/components/about-section/about-section.component";
-import { SolutionsComponent } from "../solutions/solutions.component";
+import { CardSolutionComponent } from '../../shared/components/card-solution/card-solution.component';
+import { Solution } from '../../shared/model/solution.model';
+import solutions from '../../shared/data/services.json';
 
 @Component({
-  selector: 'app-home',
-  imports: [RouterModule, AboutSectionComponent, SolutionsComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+	selector: 'app-home',
+	imports: [RouterModule, CardSolutionComponent],
+	templateUrl: './home.component.html',
+	styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  
-  ngOnInit(): void {
-  }
-  
+	solutions = signal<Solution[]>(solutions);
+
+	ngOnInit(): void {}
 }
